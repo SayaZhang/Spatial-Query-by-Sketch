@@ -1,0 +1,1 @@
+# Spatial-Query-by-Sketch
