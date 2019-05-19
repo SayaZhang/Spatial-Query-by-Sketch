@@ -1,0 +1,8 @@
+*.mdb  
+*.ldb  
+*.sln  
+*.config
+/openlayer/node_modules/
+/backend/Data_Collection/
+__MACOCX
+.DS_Store
