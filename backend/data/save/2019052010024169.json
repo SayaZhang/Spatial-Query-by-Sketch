@@ -1,0 +1,64 @@
+{
+    "x": [
+        {
+            "ctx": {},
+            "type": "Institute",
+            "img": {},
+            "pos": {
+                "x": 133,
+                "y": 94
+            },
+            "edgeColor": "orange",
+            "angle": 0,
+            "width": 92,
+            "height": 92,
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        {
+            "ctx": {},
+            "type": "Hotel",
+            "img": {},
+            "pos": {
+                "x": 271,
+                "y": 265
+            },
+            "edgeColor": "orange",
+            "angle": 0,
+            "width": 60,
+            "height": 60,
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        {
+            "ctx": {},
+            "type": "Natural",
+            "img": {},
+            "pos": {
+                "x": 115,
+                "y": 257
+            },
+            "edgeColor": "orange",
+            "angle": 0,
+            "width": 60,
+            "height": 60,
+            "scaleX": 1,
+            "scaleY": 1
+        }
+    ],
+    "y": [
+        {
+            "0": {
+                "center": "116.29780630336761, 39.90493166365991",
+                "title": "Test",
+                "id": 10
+            },
+            "1": {
+                "center": "116.29780630336761, 39.90493166365991",
+                "title": "Test",
+                "id": 10
+            }
+        },
+        {}
+    ]
+}

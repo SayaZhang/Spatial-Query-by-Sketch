@@ -24,10 +24,23 @@ def index():
 @app.route('/save',methods=['POST'])
 def save():
     name = get_unique_file_name()
-    x = request.form.get('x')
-    y = request.form.get('y')
-    with open("./Data_Collection/" + name + ".json",'w',encoding='utf-8') as json_file:
+    x = json.loads(request.values.get('x'))
+    y = json.loads(request.values.get('y'))
+    with open("./data/save/" + name + ".json",'w',encoding='utf-8') as json_file:
         json.dump({'x':x, 'y':y},json_file,ensure_ascii=False)
+    
+    response = make_response(jsonify(response="Success"))
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'POST'
+    response.headers['Access-Control-Allow-Headers'] = 'x-requested-with,content-type'
+    return response
+
+@app.route('/search',methods=['POST'])
+def search():
+    name = get_unique_file_name()
+    x = json.loads(request.values.get('x'))
+    with open("./data/search/" + name + ".json",'w',encoding='utf-8') as json_file:
+        json.dump({'x': x},json_file,ensure_ascii=False)
     
     response = make_response(jsonify(response="Success"))
     response.headers['Access-Control-Allow-Origin'] = '*'

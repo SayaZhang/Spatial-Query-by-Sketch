@@ -507,6 +507,36 @@ export default {
     },
     downImg() {
       this.$store.commit("setDrawObjects", this.otherStack);
+      this.$ajax({
+        url: "http://localhost:5000/search",
+        method: "post",
+        data: {
+          x: JSON.stringify(this.otherStack)
+        },
+        dataType: "JSON",
+        transformRequest: [
+          function(data) {
+            let ret = "";
+            for (let it in data) {
+              ret +=
+                encodeURIComponent(it) +
+                "=" +
+                encodeURIComponent(data[it]) +
+                "&";
+            }
+            return ret;
+          }
+        ]
+        // headers: {
+        //   "Content-Type": "application/x-www-form-urlencoded"
+        // }
+      })
+        .then(function() {
+          console.log("Create!!");
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   },
   watch: {

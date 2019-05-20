@@ -5,7 +5,7 @@ Vue.use(Vuex);
 var icons = [
   {
     name: "学校及科教服务/School",
-    type: "school",
+    type: "School",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -14,7 +14,7 @@ var icons = [
   },
   {
     name: "政府机构及公共设施/Institute",
-    type: "institute",
+    type: "Institute",
     width: "46",
     height: "46",
     viewBox: "0 0 1024 1024",
@@ -23,7 +23,7 @@ var icons = [
   },
   {
     name: "住宿服务/Hotel",
-    type: "hotel",
+    type: "Hotel",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -32,7 +32,7 @@ var icons = [
   },
   {
     name: "道路及相关设施/Road",
-    type: "road",
+    type: "Road",
     width: "30",
     height: "10",
     viewBox: "0 0 3413 1024",
@@ -41,7 +41,7 @@ var icons = [
   },
   {
     name: "植被及自然景观/Natural",
-    type: "natural",
+    type: "Natural",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -50,7 +50,7 @@ var icons = [
   },
   {
     name: "风景名胜/Scene",
-    type: "scene",
+    type: "Scene",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -59,7 +59,7 @@ var icons = [
   },
   {
     name: "餐饮服务/Repast",
-    type: "repast",
+    type: "Repast",
     width: "34",
     height: "34",
     viewBox: "0 0 1024 1024",
@@ -68,7 +68,7 @@ var icons = [
   },
   {
     name: "住宅区/Residence",
-    type: "residence",
+    type: "Residence",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -77,7 +77,7 @@ var icons = [
   },
   {
     name: "河流/River",
-    type: "river",
+    type: "River",
     width: "40",
     height: "40",
     viewBox: "0 0 1024 1024",
@@ -86,7 +86,7 @@ var icons = [
   },
   {
     name: "购物服务/Shop",
-    type: "shop",
+    type: "Shop",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -95,7 +95,7 @@ var icons = [
   },
   {
     name: "写字楼等商业用地/Company",
-    type: "company",
+    type: "Company",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -104,7 +104,7 @@ var icons = [
   },
   {
     name: "医院及其他医疗场所/Hospital",
-    type: "hospital",
+    type: "Hospital",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -113,7 +113,7 @@ var icons = [
   },
   {
     name: "生活休闲服务/Service",
-    type: "service",
+    type: "Service",
     width: "30",
     height: "30",
     viewBox: "0 0 1024 1024",
@@ -137,7 +137,8 @@ const store = new Vuex.Store({
     linesColor: 'black',
     candidates: [{ 
       center: "116.29780630336761, 39.90493166365991",
-      title: "Test"
+      title: "Test",
+      id: 10
     }],
     drawObjects: [],
     color: {

@@ -1,1 +1,17 @@
-{"\u516c\u68c0\u6cd5\u673a\u5173": 0, "\u7701\u7ea7\u653f\u5e9c": 1, "\u5730\u533a\u5e02\u653f\u5e9c": 2, "\u533a\u53bf\u7ea7\u653f\u5e9c": 3, "\u5c0f\u5b66\u53ca\u5e7c\u513f\u56ed": 4, "\u9ad8\u7b49\u9662\u6821": 5, "\u4e2d\u5b66": 6, "\u79d1\u6559\u6587\u5316\u670d\u52a1": 7, "\u81ea\u52a8\u53d6\u6b3e\u673a": 8, "\u94f6\u884c\u76f8\u5173": 9, "\u94f6\u884c": 10, "\u4e13\u79d1\u533b\u9662": 11, "\u533b\u7597\u4fdd\u5065\u670d\u52a1": 12, "\u7efc\u5408\u533b\u9662": 13, "\u5c0f\u8def": 14, "\u6b21\u8981\u9053\u8def": 15, "\u56fd\u9053": 16, "\u9ad8\u901f\u8def": 17, "\u5feb\u901f\u8def": 18, "\u9910\u996e\u670d\u52a1": 19, "\u8d2d\u7269\u670d\u52a1": 20, "\u5355\u7ebf\u6c34\u7cfb": 21, "\u4f4f\u5bbf\u670d\u52a1": 22}
+{
+    "School": 0,
+    "Institute": 1,
+    "Building": 2,
+    "Hotel": 3,
+    "Landuse": 4,
+    "Road": 5,
+    "Natural": 6,
+    "Repast": 7,
+    "Residence": 8,
+    "River": 9,
+    "Shop": 10,
+    "Company": 11,
+    "Hospital": 12,
+    "Service": 13,
+    "Scene": 14
+}

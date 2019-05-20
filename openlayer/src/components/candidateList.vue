@@ -106,8 +106,9 @@ export default {
         method: "post",
         data: {
           x: JSON.stringify(this.drawObjects),
-          y: JSON.stringify(y)
+          y: JSON.stringify(y),
         },
+        dataType: 'JSON',
         transformRequest: [
           function(data) {
             let ret = "";
@@ -121,9 +122,9 @@ export default {
             return ret;
           }
         ],
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
+        // headers: {
+        //   "Content-Type": "application/x-www-form-urlencoded"
+        // }
       })
         .then(function() {
           console.log("Create!!");
