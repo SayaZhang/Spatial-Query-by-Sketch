@@ -6,6 +6,7 @@ from datetime import *
 import time
 import random
 import json 
+from parseSketch import *
 
 app = Flask(__name__)
 
@@ -41,6 +42,8 @@ def search():
     x = json.loads(request.values.get('x'))
     with open("./data/search/" + name + ".json",'w',encoding='utf-8') as json_file:
         json.dump({'x': x},json_file,ensure_ascii=False)
+
+    x = parse(x)
     
     response = make_response(jsonify(response="Success"))
     response.headers['Access-Control-Allow-Origin'] = '*'
