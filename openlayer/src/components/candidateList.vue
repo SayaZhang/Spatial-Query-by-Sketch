@@ -10,13 +10,18 @@
     <div id="candidates">
       <div v-for="(candidate, index) in candidates" :key="index" class="candidate-panel">
         <div class="map-header">
+          <span class="map-order">{{index+1}}.</span>
           <span class="map-title">{{candidate.title}}</span>
+          <span class="pick-title" 
+            v-if="mapGroup.indexOf(index) > -1">
+            {{mapGroup.indexOf(index) + 1}}
+          </span>
           <b-checkbox
             v-model="mapGroup"
             type="is-success"
             class="map-check"
             :native-value="index"
-          >YES</b-checkbox>
+          >YES</b-checkbox>         
           <candidateItem
             :center="candidate.center"
             :title="candidate.title"
@@ -48,6 +53,13 @@
             placeholder="Please enter latitude and longitude (like 116.29780630336761, 39.90493166365991)"
           ></b-input>
         </b-field>
+
+        <!-- <candidateItem
+          :center="latlong"
+          :title="location"
+          :index="99"
+          class=""
+          /> -->
       </section>
     </div>
   </b-modal>
@@ -60,7 +72,7 @@ export default {
   data() {
     return {
       mapGroup: [],
-      latlong: "",
+      latlong: "",//116.29780630336761, 39.90493166365991
       location: ""
     };
   },
@@ -155,9 +167,17 @@ export default {
       width: 100%
       padding: 5px;
       .map-title
-        padding: 8px 0 0 8px
+        padding: 8px 0 0 0
       .map-check
         float: right
+      span.pick-title
+        float: right
+        padding: 0 7px
+        background: orange
+        border-radius: 50%
+        color: #fff
+        margin-left: 5px
+        line-height: 22px
   
   .result-header 
     display: flex

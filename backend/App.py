@@ -22,7 +22,7 @@ def get_unique_file_name():
 def index():
     return "Hello, World!"
 
-@app.route('/save',methods=['POST'])
+@app.route('/save', methods=['POST'])
 def save():
     name = get_unique_file_name()
     x = json.loads(request.values.get('x'))
