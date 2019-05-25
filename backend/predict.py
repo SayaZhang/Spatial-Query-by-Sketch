@@ -224,6 +224,23 @@ class SPP_CNN(nn.Block):
         return fc2
 
 
+def get_train_base(net, train_iter, ctx):
+    
+    # Predict for train
+    for i, (data, label) in enumerate(train_iter):
+        data = data.as_in_context(ctx)
+        label = label.as_in_context(ctx)
+        
+        if i == 0:
+            X = net(data).asnumpy()
+            Y = label.asnumpy()
+        else:
+            X = np.concatenate((X, net(data).asnumpy()))
+            Y = np.concatenate((Y, label.asnumpy()))
+    
+    return [X,Y]
+
+
 # In[27]:
 
 
@@ -231,15 +248,15 @@ ctx = mx.gpu()
 batch_size = 512
 random.seed(47)
       
-# test_iter = gdata.DataLoader(gdata.ArrayDataset(x_test, y_test), batch_size, shuffle=True)
-# x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
+test_iter = gdata.DataLoader(gdata.ArrayDataset(x_test, y_test), batch_size, shuffle=True)
+x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
     
 net = SPP_CNN()
 net.load_parameters('SPP+CNN+NEW.params')
 print('Build Net Success!')
     
-# train_base = evaluate_net(net, x_iter, ctx)
-# nbrs = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree').fit(train_base[0])
+train_base = get_train_base(net, x_iter, ctx)
+nbrs = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree').fit(train_base[0])
 
 
 # In[26]:
