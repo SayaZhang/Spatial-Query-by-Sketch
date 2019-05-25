@@ -29,7 +29,7 @@ from numpy import linalg
 # In[2]:
 
 
-x_0 = pickle.load(open('output/train/x_0.pkl', 'rb'))
+x_0 = pickle.load(open('../../train/x_0.pkl', 'rb'))
 
 
 # In[17]:
@@ -42,13 +42,13 @@ y = np.array(x_0[1]).astype(np.float32)
 # In[4]:
 
 
-label_info = pd.read_csv('./output/train/label_info.csv')
+label_info = pd.read_csv('../../train/label_info.csv')
 
 
 # In[19]:
 
 
-test = pickle.load(open('output/test_500_2.pkl', 'rb'))
+test = pickle.load(open('../../test_500_2.pkl', 'rb'))
 x_test = np.array(test[0]).astype(np.float32)
 y_test = np.array(test[1]).astype(np.float32)
 
