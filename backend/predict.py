@@ -231,19 +231,19 @@ ctx = mx.gpu()
 batch_size = 512
 random.seed(47)
       
-test_iter = gdata.DataLoader(gdata.ArrayDataset(x_test, y_test), batch_size, shuffle=True)
-x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
+# test_iter = gdata.DataLoader(gdata.ArrayDataset(x_test, y_test), batch_size, shuffle=True)
+# x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
     
 net = SPP_CNN()
-net.collect_params().load('SPP+CNN+NEW.params', ctx)
+net.load_parameters('SPP+CNN+NEW.params')
 print('Build Net Success!')
     
-train_base = evaluate_net(net, x_iter, ctx)
-nbrs = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree').fit(train_base[0])
+# train_base = evaluate_net(net, x_iter, ctx)
+# nbrs = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree').fit(train_base[0])
 
 
 # In[26]:
 
 
-result = predict(net, nbrs, train_base[1], test_iter, ctx)
+# result = predict(net, nbrs, train_base[1], test_iter, ctx)
 

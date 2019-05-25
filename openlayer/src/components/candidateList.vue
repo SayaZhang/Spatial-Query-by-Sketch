@@ -172,12 +172,12 @@ export default {
         float: right
       span.pick-title
         float: right
-        padding: 0 7px
+        padding: 0 6px
         background: orange
         border-radius: 50%
         color: #fff
         margin-left: 5px
-        line-height: 22px
+        line-height: 1.2em
   
   .result-header 
     display: flex
