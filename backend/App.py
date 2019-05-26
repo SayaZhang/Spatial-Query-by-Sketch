@@ -7,6 +7,7 @@ import time
 import random
 import json 
 from parseSketch import *
+from predict import *
 
 app = Flask(__name__)
 
