@@ -114,7 +114,7 @@ export default {
       }
 
       this.$ajax({
-        url: "http://localhost:5000/save",
+        url: "http://159.226.172.85:5000/save",
         method: "post",
         data: {
           x: JSON.stringify(this.drawObjects),

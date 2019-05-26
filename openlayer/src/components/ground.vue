@@ -508,7 +508,7 @@ export default {
     downImg() {
       this.$store.commit("setDrawObjects", this.otherStack);
       this.$ajax({
-        url: "http://localhost:5000/search",
+        url: "http://159.226.172.85:5000/search",
         method: "post",
         data: {
           x: JSON.stringify(this.otherStack)
