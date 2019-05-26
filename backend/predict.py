@@ -1,9 +1,6 @@
 
 # coding: utf-8
 
-# In[10]:
-
-
 import os
 import pickle
 import random
@@ -23,74 +20,7 @@ from sklearn import preprocessing
 from scipy.spatial.distance import pdist, cdist
 from numpy import linalg
 
-
-# ## Data Augment
-
-# In[2]:
-
-
-x_0 = pickle.load(open('../../train/x_0.pkl', 'rb'))
-
-
-# In[17]:
-
-
-x = np.array(x_0[0]).astype(np.float32)
-y = np.array(x_0[1]).astype(np.float32)
-
-
-# In[4]:
-
-
-label_info = pd.read_csv('../../train/label_info.csv')
-
-
-# In[19]:
-
-
-test = pickle.load(open('../../test_500_2.pkl', 'rb'))
-x_test = np.array(test[0]).astype(np.float32)
-y_test = np.array(test[1]).astype(np.float32)
-
-
-# ## Model
-
-# In[11]:
-
-
-class ArrayDataset():
-    """A dataset that combines multiple dataset-like objects, e.g.
-    Datasets, lists, arrays, etc.
-
-    The i-th sample is defined as `(x1[i], x2[i], ...)`.
-
-    Parameters
-    ----------
-    *args : one or more dataset-like objects
-        The data arrays.
-    """
-    def __init__(self, *args):
-        assert len(args) > 0, "Needs at least 1 arrays"
-        self._length = len(args[0])
-        self._data = []
-        for i, data in enumerate(args):
-            assert len(data) == self._length,                 "All arrays must have the same length; array[0] has length %d "                 "while array[%d] has %d." % (self._length, i+1, len(data))
-            if isinstance(data, nd.NDArray) and len(data.shape) == 1:
-                data = data.asnumpy()
-            self._data.append(data)
-
-    def __getitem__(self, idx):
-        if len(Xself._data) == 1:
-            return self._data[0][idx]
-        else:
-            return tuple(data[idx] for data in self._data)
-
-    def __len__(self):
-        return self._length
-
-
-# In[12]:
-
+#label_info = pd.read_csv('../../train/label_info.csv')
 
 def spatial_pyramid_pool(previous_conv, num_sample, shape, out_pool_size):
     '''
@@ -129,29 +59,6 @@ def spatial_pyramid_pool(previous_conv, num_sample, shape, out_pool_size):
     
     return spp
 
-
-# In[ ]:
-
-
-def get_train(net, train_iter, ctx):
-    
-    # Predict for train
-    for i, (data, label) in enumerate(train_iter):
-        data = data.as_in_context(ctx)
-        label = label.as_in_context(ctx)
-        
-        if i == 0:
-            X = net(data).asnumpy()
-            Y = label.asnumpy()
-        else:
-            X = np.concatenate((X, net(data).asnumpy()))
-            Y = np.concatenate((Y, label.asnumpy()))
-    return [X,Y]
-
-
-# In[13]:
-
-
 def predict(net, nbrs, Y, test_iter, ctx): 
     # Predict for test
     for i, (test, label) in enumerate(test_iter):
@@ -167,10 +74,6 @@ def predict(net, nbrs, Y, test_iter, ctx):
       
     distances, indices = nbrs.kneighbors(X_test)
     return Y[indices[:12]]
-
-
-# In[14]:
-
 
 class SPP_CNN(nn.Block):
     '''
@@ -223,8 +126,22 @@ class SPP_CNN(nn.Block):
         
         return fc2
 
+def get_train_base():
 
-def get_train_base(net, train_iter, ctx):
+    x_0 = pickle.load(open('../../train/x_0.pkl', 'rb'))
+
+    x = np.array(x_0[0]).astype(np.float32)
+    y = np.array(x_0[1]).astype(np.float32)
+
+    ctx = mx.gpu()
+    batch_size = 512
+    random.seed(47)
+
+    x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
+        
+    net = SPP_CNN()
+    net.load_parameters('../model/model.params')
+    print('Build Net Success!')
     
     # Predict for train
     for i, (data, label) in enumerate(train_iter):
@@ -237,30 +154,35 @@ def get_train_base(net, train_iter, ctx):
         else:
             X = np.concatenate((X, net(data).asnumpy()))
             Y = np.concatenate((Y, label.asnumpy()))
+
+    pickle.dump([X,Y], open('../../train/train_base.pkl', 'wb'))
+
+def search(x_test):
+
+    ctx = mx.gpu()
+    batch_size = 512
+    random.seed(47)
+        
+    test_iter = gdata.DataLoader(gdata.ArrayDataset(x_test), batch_size, shuffle=True)
     
-    return [X,Y]
+    net = SPP_CNN()
+    net.load_parameters('../model/model.params')
+    print('Build Net Success!')
+        
+    train_base = pickle.load(open('../../train/train_base.pkl', 'rb'))
+    nbrs = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree').fit(train_base[0])
 
+    result = predict(net, nbrs, train_base[1], test_iter, ctx)
+    return result
 
-# In[27]:
+def test_by_data():
+    test = pickle.load(open('../../test_500_2.pkl', 'rb'))
+    x_test = np.array(test[0]).astype(np.float32)
 
+    return search(x_test)
 
-ctx = mx.gpu()
-batch_size = 512
-random.seed(47)
-      
-test_iter = gdata.DataLoader(gdata.ArrayDataset(x_test, y_test), batch_size, shuffle=True)
-x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
-    
-net = SPP_CNN()
-net.load_parameters('SPP+CNN+NEW.params')
-print('Build Net Success!')
-    
-train_base = get_train_base(net, x_iter, ctx)
-nbrs = neighbors.NearestNeighbors(n_neighbors=10, algorithm='ball_tree').fit(train_base[0])
+def test_by_sketch(test):
+    x_test = np.array(test).astype(np.float32)
+    return search(x_test)
 
-
-# In[26]:
-
-
-# result = predict(net, nbrs, train_base[1], test_iter, ctx)
-
+get_train_base()
