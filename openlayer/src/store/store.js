@@ -135,11 +135,7 @@ const store = new Vuex.Store({
     equipmentColor: 'yellow',
     playersColor: '',
     linesColor: 'black',
-    candidates: [{ 
-      center: "116.29780630336761, 39.90493166365991",
-      title: "Test",
-      id: 10
-    }],
+    candidates: [],
     drawObjects: [],
     color: {
       green: '#45d695',
@@ -212,8 +208,10 @@ const store = new Vuex.Store({
     },
     changeIsPlayerState(state, newState) {
       state.isPlayer = newState;
+    },
+    setCandidates(state, newState) {
+      state.candidates = newState;
     }
-
   }
 });
 

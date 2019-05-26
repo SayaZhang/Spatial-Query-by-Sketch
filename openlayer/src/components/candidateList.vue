@@ -11,7 +11,7 @@
       <div v-for="(candidate, index) in candidates" :key="index" class="candidate-panel">
         <div class="map-header">
           <span class="map-order">{{index+1}}.</span>
-          <span class="map-title">{{candidate.title}}</span>
+          <span class="map-title">{{candidate[1]}}</span>
           <span class="pick-title" 
             v-if="mapGroup.indexOf(index) > -1">
             {{mapGroup.indexOf(index) + 1}}
@@ -23,8 +23,8 @@
             :native-value="index"
           >YES</b-checkbox>         
           <candidateItem
-            :center="candidate.center"
-            :title="candidate.title"
+            :center="candidate[0]"
+            :title="candidate[1]"
             :index="index"
             class="candidate"
           />
@@ -81,11 +81,11 @@ export default {
   },
   computed: {
     candidates() {
-      var arr = [];
-      for (var i = 0; i < 12; i++) {
-        arr.push(this.$store.state.candidates[0]);
-      }
-      return arr;
+      // var arr = [];
+      // for (var i = 0; i < 12; i++) {
+      //   arr.push(this.$store.state.candidates[0]);
+      // }
+      return this.$store.state.candidates;
     },
     downloading: {
       get() {

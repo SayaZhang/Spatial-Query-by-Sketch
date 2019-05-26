@@ -97,7 +97,7 @@ export default {
   methods,
   data() {
     return {
-      zoom: 15.5,
+      zoom: 15,
       checkbox: false,
       rotation: 0,
       clickCoordinate: undefined,
@@ -127,8 +127,9 @@ export default {
       get: function() {
         var arr = [];
         this.center.split(",").forEach(item => {
-          arr.push(parseInt(item));
+          arr.push(parseFloat(item));
         });
+        console.log(arr)
         return arr;
       },
       set: function() {}

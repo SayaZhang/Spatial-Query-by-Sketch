@@ -531,8 +531,9 @@ export default {
         //   "Content-Type": "application/x-www-form-urlencoded"
         // }
       })
-        .then(function() {
-          console.log("Create!!");
+        .then(response => {
+          console.log(response.data.response);
+          this.$store.commit("setCandidates", response.data.response);
         })
         .catch(function(error) {
           console.log(error);
