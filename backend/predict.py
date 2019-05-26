@@ -133,7 +133,7 @@ def get_train_base():
     x = np.array(x_0[0]).astype(np.float32)
     y = np.array(x_0[1]).astype(np.float32)
 
-    ctx = mx.gpu()
+    ctx = mx.cpu()
     batch_size = 512
     random.seed(47)
 
@@ -159,7 +159,7 @@ def get_train_base():
 
 def search(x_test):
 
-    ctx = mx.gpu()
+    ctx = mx.cpu()
     batch_size = 512
     random.seed(47)
         
