@@ -45,7 +45,7 @@ def search():
         json.dump({'x': x},json_file,ensure_ascii=False)
 
     x = parse(x)
-    x = test_by_sketch(x)
+    #x = test_by_sketch(x)
     
     response = make_response(jsonify(response="Success"))
     response.headers['Access-Control-Allow-Origin'] = '*'

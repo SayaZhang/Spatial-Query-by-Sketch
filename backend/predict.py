@@ -5,6 +5,7 @@ import os
 import pickle
 import random
 import math
+import json
 
 import mxnet as mx
 import numpy as np
@@ -175,14 +176,23 @@ def search(x_test):
     result = predict(net, nbrs, train_base[1], test_iter, ctx)
     return result
 
+def get_sketch(fname):   
+    with open("../data/search/"+fname+".json", 'r') as f:
+        x = json.loads(f.read())
+    from parseSketch import *
+    x = parse(x)
+    return(x)
+
 def test_by_data():
     test = pickle.load(open('../../train/test_500_2.pkl', 'rb'))
     x_test = np.array(test[0]).astype(np.float32)
 
     return search(x_test)
 
-def test_by_sketch(test):
+def test_by_sketch():
+    fname = '2019052010104108'
+    test = get_sketch(fname)
     x_test = np.array(test).astype(np.float32)
     return search(x_test)
 
-#get_train_base()
+get_sketch()
