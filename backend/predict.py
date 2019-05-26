@@ -20,6 +20,7 @@ from sklearn import neighbors
 from sklearn import preprocessing
 from scipy.spatial.distance import pdist, cdist
 from numpy import linalg
+from parseSketch import *
 
 #label_info = pd.read_csv('../../train/label_info.csv')
 
@@ -177,9 +178,8 @@ def search(x_test):
     return result
 
 def get_sketch(fname):   
-    with open("../data/search/"+fname+".json", 'r') as f:
-        x = json.loads(f.read())
-    from parseSketch import *
+    with open("./data/search/"+fname+".json", 'r') as f:
+        x = json.load(f)
     x = parse(x)
     return(x)
 
@@ -195,4 +195,5 @@ def test_by_sketch():
     x_test = np.array(test).astype(np.float32)
     return search(x_test)
 
-get_sketch()
+fname = '20190521102020010'
+get_sketch(fname)
