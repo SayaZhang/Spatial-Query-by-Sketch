@@ -61,16 +61,16 @@ def spatial_pyramid_pool(previous_conv, num_sample, shape, out_pool_size):
 
 def predict(net, nbrs, Y, test_iter, ctx): 
     # Predict for test
-    for i, (test, label) in enumerate(test_iter):
+    for i, (test) in enumerate(test_iter):
         test = test.as_in_context(ctx)
-        label = label.as_in_context(ctx)
+        #label = label.as_in_context(ctx)
         
         if i == 0:
             X_test = net(test).asnumpy()
-            Y_test = label.asnumpy()
+            #Y_test = label.asnumpy()
         else:
             X_test = np.concatenate((X_test, net(test).asnumpy()))
-            Y_test = np.concatenate((Y_test, label.asnumpy()))
+            #Y_test = np.concatenate((Y_test, label.asnumpy()))
       
     distances, indices = nbrs.kneighbors(X_test)
     return Y[indices[:12]]
@@ -176,7 +176,7 @@ def search(x_test):
     return result
 
 def test_by_data():
-    test = pickle.load(open('../../test_500_2.pkl', 'rb'))
+    test = pickle.load(open('../../train/test_500_2.pkl', 'rb'))
     x_test = np.array(test[0]).astype(np.float32)
 
     return search(x_test)
@@ -185,4 +185,4 @@ def test_by_sketch(test):
     x_test = np.array(test).astype(np.float32)
     return search(x_test)
 
-get_train_base()
+#get_train_base()

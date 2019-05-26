@@ -44,6 +44,7 @@ def search():
         json.dump({'x': x},json_file,ensure_ascii=False)
 
     x = parse(x)
+    x = test_by_sketch(x)
     
     response = make_response(jsonify(response="Success"))
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -53,3 +54,4 @@ def search():
 
 if __name__ == '__main__':
     app.run(debug=True)
+    #app.run(host='159.226.172.85', port='5000', debug=True)
