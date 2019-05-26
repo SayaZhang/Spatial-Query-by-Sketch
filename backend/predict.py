@@ -137,7 +137,7 @@ def get_train_base():
     batch_size = 512
     random.seed(47)
 
-    x_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
+    train_iter = gdata.DataLoader(gdata.ArrayDataset(x, y), batch_size, shuffle=False)
         
     net = SPP_CNN()
     net.load_parameters('../model/model.params')
