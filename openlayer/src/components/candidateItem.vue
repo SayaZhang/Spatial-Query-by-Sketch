@@ -2,7 +2,7 @@
   <div
     id="map-component"
     :class="[$options.name]"
-    :style="{width: '100%', height: '80%'}"
+    :style="{width: '100%', height: '90%'}"
   >
     <!-- map  -->
     <vl-map
