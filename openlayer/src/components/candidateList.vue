@@ -5,30 +5,43 @@
       <div class="save">
         <span @click="save">Save</span>
       </div>
+      <b-notification 
+        type="is-success" 
+        has-icon
+        auto-close
+        :active.sync="isSave"
+        aria-close-label="Close notification">
+        Save Success!
+      </b-notification>
     </div>
 
     <div id="candidates">
       <div v-for="(candidate, index) in candidates" :key="index" class="candidate-panel">
         <div class="map-header">
-          <span class="map-order">{{index+1}}.</span>
-          <span class="map-title">{{candidate[1]}}</span>
+          <span class="map-order">{{ index+1 }}.</span>
+          <span class="map-title">{{ candidate[1] === undefined ? "" : candidate[1] }}</span>
+          
           <span class="pick-title" 
             v-if="mapGroup.indexOf(index) > -1">
             {{mapGroup.indexOf(index) + 1}}
           </span>
+          
           <b-checkbox
             v-model="mapGroup"
             type="is-success"
             class="map-check"
             :native-value="index"
           >YES</b-checkbox>         
-          <candidateItem
-            :center="candidate[0]"
-            :title="candidate[1]"
-            :index="index"
-            class="candidate"
-          />
-        </div>
+
+        </div>  
+          
+        <candidateItem
+          :center="candidate[0]"
+          :title="candidate[1]"
+          :index="index"
+          class="candidate"
+        />
+        
       </div>
     </div>
 
@@ -73,7 +86,8 @@ export default {
     return {
       mapGroup: [],
       latlong: "",//116.29780630336761, 39.90493166365991
-      location: ""
+      location: "",
+      isSave: false
     };
   },
   components: {
@@ -113,6 +127,8 @@ export default {
         y[1].location = this.location;
       }
 
+      var that = this;
+
       this.$ajax({
         url: "http://159.226.172.85:5000/save",
         method: "post",
@@ -139,6 +155,7 @@ export default {
         // }
       })
         .then(function() {
+          that.isSave = true;
           console.log("Create!!");
         })
         .catch(function(error) {
@@ -190,8 +207,13 @@ export default {
     font-weight: bold
     z-index: 100
     padding: 0.5em 1em
+    article.notification.is-success
+      height: 80px
+      right: 0
+      top: 4em
+      position: absolute
     .save
-        height: 2em;
+        height: 2em
         float: right
         cursor:pointer
         display: flex
