@@ -177,16 +177,17 @@ export default {
     flex-wrap: wrap;
     color: #7a7a7a;
     .candidate-panel
-      margin: 15px;
+      margin: 15px 15px 30px;
       width: 29%;
       background: #ffffffc2
     .map-header
       width: 100%
       padding: 5px;
-      .map-title
-        padding: 8px 0 0 0
+      height: 3em;
+      display: flex;
+      align-items: Center
       .map-check
-        float: right
+        margin-left: auto
       span.pick-title
         float: right
         padding: 0 6px
