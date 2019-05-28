@@ -189,7 +189,6 @@ export default {
       .map-check
         margin-left: auto
       span.pick-title
-        float: right
         padding: 0 6px
         background: orange
         border-radius: 50%

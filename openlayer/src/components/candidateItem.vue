@@ -97,7 +97,7 @@ export default {
   methods,
   data() {
     return {
-      zoom: 15,
+      zoom: 16,
       checkbox: false,
       rotation: 0,
       clickCoordinate: undefined,
